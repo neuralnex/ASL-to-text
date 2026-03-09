@@ -1,0 +1,31 @@
+# Dataset files (too large for git)
+dataSet/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Model files (can be large)
+# Uncomment if you want to exclude model files
+# Models/*.h5
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
