@@ -1,0 +1,9 @@
+[MASTER]
+ignore-patterns=__pycache__|\.ipynb_checkpoints
+
+[MESSAGES CONTROL]
+disable=import-error,no-member,missing-module-docstring,missing-class-docstring,missing-function-docstring,import-outside-toplevel
+
+[TYPECHECK]
+ignored-modules=tensorflow,keras,cv2,mediapipe,numpy,sklearn,PIL
+
