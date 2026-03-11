@@ -1,6 +1,10 @@
 # Dataset files (too large for git)
 dataSet/
 
+# Phase 2 extracted landmarks + downloaded MediaPipe task models (generated artifacts)
+asl_extended/data/wlasl_landmarks/
+asl_extended/models/mediapipe/
+
 # Python
 __pycache__/
 *.py[cod]

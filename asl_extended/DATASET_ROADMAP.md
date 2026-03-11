@@ -3,12 +3,12 @@
 ## Current Status
 
 ### Phase 1: Fingerspelling (Current)
-- **Dataset:** Your existing processed images (`dataSet/trainingData/`, `dataSet/testingData/`)
+- **Dataset:** My existing processed images (`dataSet/trainingData/`, `dataSet/testingData/`)
 - **Format:** Binary/grayscale cropped hand images (310x310px)
 - **Status:** ✅ Working with CNN model (95-98% accuracy)
 - **MediaPipe Landmarks:** ❌ Not compatible (images are processed, not natural)
 
-**Decision:** Keep using original CNN approach for Phase 1. It works perfectly with your existing data.
+**Decision:** I keep using the original CNN approach for Phase 1 because it fits my existing dataset.
 
 ---
 
@@ -16,7 +16,7 @@
 
 ### When to Use WLASL Dataset
 
-**Timeline:** Start Phase 2 after Phase 1 is complete and documented.
+**Timeline:** I start Phase 2 after Phase 1 is complete and documented.
 
 **Purpose:**
 - Train models to recognize **full ASL words** (not just letters)

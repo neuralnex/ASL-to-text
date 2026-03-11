@@ -3,7 +3,7 @@
 
 ## Test Configuration
 - MediaPipe Hand Landmarker
-- Testing cropped hand images from dataset
+- I tested cropped hand images from my dataset
 - Confidence thresholds: 0.3
 
 ## Results
@@ -70,7 +70,7 @@ The dataset images are **processed binary images** (after thresholding), not nat
 ## Recommendation
 
 **Option 1: Use Original CNN Approach (Recommended)**
-- Your existing CNN model already works well with these processed images
+- My existing CNN model already works well with these processed images
 - Achieves 95-98% accuracy on your dataset
 - No need to convert to landmarks - keep using the original system
 
@@ -86,7 +86,7 @@ The dataset images are **processed binary images** (after thresholding), not nat
 
 ## Conclusion
 
-For Phase 1, **stick with your original CNN approach** since it's already working well with your processed dataset. The landmark-based approach should be used for Phase 2 when collecting new data with natural hand images.
+For Phase 1, **I stick with the CNN approach** since it already works well with my processed dataset. I keep the landmark-based approach for Phase 2 with natural RGB video data (WLASL).
 
 ---
 

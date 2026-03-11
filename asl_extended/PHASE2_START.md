@@ -2,12 +2,12 @@
 
 ## Overview
 
-Phase 2 extends the system to recognize full ASL words using sequences of holistic landmarks (hands + body + face) from the WLASL dataset.
+In Phase 2, I extend the system to recognize full ASL words using **video sequences** and holistic landmarks (hands + pose + a small set of face points) from the WLASL dataset.
 
 ## Prerequisites
 
-1. ✅ Phase 1 (CNN Fingerspelling) completed
-2. Install Phase 2 dependencies:
+1. ✅ I have Phase 1 (CNN fingerspelling) completed
+2. I install the Phase 2 dependencies:
    ```bash
    pip install --break-system-packages fiftyone mediapipe<0.11.0
    ```
@@ -16,7 +16,7 @@ Phase 2 extends the system to recognize full ASL words using sequences of holist
 
 ### Step 1: Load WLASL Dataset and Extract Landmarks
 
-The WLASL dataset contains 11,980 video samples of 2,000 ASL words. We'll extract landmarks from selected words.
+The WLASL dataset contains 11,980 video samples of 2,000 ASL words. I extract landmarks from a selected subset of words.
 
 ```bash
 cd asl_extended
@@ -52,7 +52,7 @@ THANK_YOU: 50 samples
 
 ### Step 2: Train the Word Recognition Model
 
-Open and run the training notebook:
+I open and run the training notebook:
 
 ```bash
 jupyter notebook notebooks/train_word_model.ipynb
@@ -76,7 +76,7 @@ jupyter notebook notebooks/train_word_model.ipynb
 
 ### Step 3: Run Word Recognition Application
 
-Once the model is trained:
+Once the model is trained, I run:
 
 ```bash
 python app/word_app.py
@@ -90,9 +90,9 @@ python app/word_app.py
 - Visual feedback with landmark overlay
 
 **Usage:**
-- Sign words clearly in front of camera
-- Hold each sign for 1-2 seconds
-- System builds sentences from detected words
+- I sign words clearly in front of the camera
+- I hold each sign for about 1–2 seconds
+- The system builds a sentence from detected words
 - Press window close button to exit
 
 ## File Structure

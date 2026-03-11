@@ -23,9 +23,19 @@ class HolisticLandmarkExtractor:
             from mediapipe.tasks.python import vision
             from mediapipe.tasks.python import BaseOptions
             import os
+            import urllib.request
             
-            hand_model = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'models', 'mediapipe', 'hand_landmarker.task')
-            pose_model = None
+            model_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'models', 'mediapipe')
+            os.makedirs(model_dir, exist_ok=True)
+            hand_model = os.path.join(model_dir, 'hand_landmarker.task')
+            
+            if not os.path.exists(hand_model):
+                print(f"Downloading MediaPipe hand landmarker model to {hand_model}...")
+                urllib.request.urlretrieve(
+                    "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task",
+                    hand_model
+                )
+                print("Download complete.")
             
             hand_base = BaseOptions(model_asset_path=hand_model)
             hand_options = vision.HandLandmarkerOptions(

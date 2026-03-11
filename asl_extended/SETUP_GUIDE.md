@@ -11,7 +11,7 @@ pip install --break-system-packages -r requirements.txt
 
 ### Step 2: Train the CNN Model
 
-**Uses your existing dataset - no new data collection needed!**
+**I use my existing dataset, so I don’t need new data collection for Phase 1.**
 
 Open and run the Jupyter notebook:
 
@@ -50,9 +50,9 @@ python app/cnn_app.py
 
 ### Overview
 
-Phase 2 extends the system to recognize full ASL words using sequences of landmarks (motion + hands).
+In Phase 2, I extend the system to recognize full ASL words using **video sequences** (motion over time), not single images.
 
-**Uses WLASL dataset from Hugging Face - no webcam needed!**
+**I use the WLASL dataset from Hugging Face, so I can start Phase 2 even if I cannot collect new data.**
 
 ### Prerequisites
 
@@ -64,92 +64,46 @@ Phase 2 extends the system to recognize full ASL words using sequences of landma
 
 ### Phase 2 Implementation Steps
 
-#### Step 1: Set Up WLASL Dataset Access
+#### Step 1: Download WLASL and Extract Landmarks
 
-Create a new script to download and process WLASL dataset:
-
-```bash
-# Create the script
-touch data/wlasl_loader.py
-```
-
-The script should:
-- Use FiftyOne to load WLASL dataset from Hugging Face
-- Filter to selected word subset (50-100 common words)
-- Extract MediaPipe Holistic landmarks from videos
-- Save landmark sequences for training
-
-#### Step 2: Create Holistic Landmark Extractor
-
-Extend the landmark extractor to use MediaPipe Holistic:
+I run the loader that downloads WLASL and converts videos into landmark sequences:
 
 ```bash
-# Create new extractor
-touch utils/holistic_extractor.py
+cd asl_extended
+python3 data/wlasl_loader.py
 ```
 
-This should extract:
-- 21 hand landmarks (both hands)
-- 33 body landmarks (upper body)
-- 468 face landmarks (for future use)
+This will:
+- Load WLASL via FiftyOne + Hugging Face
+- Filter to my selected words
+- Extract MediaPipe landmarks from sampled video frames
+- Save sequences to `data/wlasl_landmarks/`
 
-#### Step 3: Build Sequence Data Collector
+#### Step 2: Landmark Extraction Details
 
-Create a data collector for word-level signs:
+I use `utils/holistic_extractor.py` to turn frames into numeric features (hands and pose; a small face subset when available). This produces a consistent feature vector per frame, which is what the sequence model learns from.
+
+#### Step 3: Train the Word Model
+
+After landmarks exist in `data/wlasl_landmarks/`, I train the sequence model:
 
 ```bash
-# Create collector
-touch data/word_collector.py
+jupyter notebook notebooks/train_word_model.ipynb
 ```
 
-This should:
-- Record video sequences (1-3 seconds per sign)
-- Extract holistic landmarks frame-by-frame
-- Save sequences with word labels
+#### Step 4: Run the Word App
 
-#### Step 4: Create Sequence Model
-
-Build BiLSTM/GRU model for sequence classification:
+After training, I run the Phase 2 app:
 
 ```bash
-# Create model
-touch models/sequence_classifier.py
+python3 app/word_app.py
 ```
 
-Architecture:
-- Input: sequences of 16-32 frames
-- BiLSTM layers (128-256 units)
-- Dense layers for classification
-- Output: word class probabilities
+### Notes for Phase 2
 
-#### Step 5: Create Training Notebook
-
-Create notebook for training word-level model:
-
-```bash
-# Create notebook
-touch notebooks/train_word_model.ipynb
-```
-
-Should include:
-- Data loading from WLASL + custom data
-- Sequence preprocessing
-- Model training
-- Evaluation metrics
-
-#### Step 6: Extend Application
-
-Update the application to support word recognition mode:
-
-```bash
-# Create extended app
-touch app/word_app.py
-```
-
-Features:
-- Mode switching: Fingerspelling vs. Word Recognition
-- Frame buffer for sequence processing
-- Word prediction display
+- WLASL is a **video** dataset. I rely on motion, which is why Phase 2 uses sequence models.
+- The first run can be slow because it downloads videos and extracts landmarks.
+- For faster iteration, I start with fewer words and a smaller `max_samples_per_word`, then expand.
 
 ### Phase 2 File Structure
 
@@ -157,7 +111,6 @@ Features:
 asl_extended/
 ├── data/
 │   ├── wlasl_loader.py          # NEW: WLASL dataset loader
-│   ├── word_collector.py        # NEW: Word-level data collection
 │   └── sequence_loader.py       # NEW: Sequence data loading
 ├── models/
 │   └── sequence_classifier.py   # NEW: BiLSTM/GRU model

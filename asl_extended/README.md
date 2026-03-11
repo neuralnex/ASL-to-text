@@ -2,9 +2,9 @@
 
 ## Overview
 
-This is the extended ASL recognition system with two phases:
-- **Phase 1:** CNN-Based Fingerspelling Recognition (using existing processed images)
-- **Phase 2:** Word-Level ASL Recognition (using WLASL dataset from Hugging Face)
+This folder is my extended ASL recognition system with two phases:
+- **Phase 1:** CNN-based fingerspelling recognition (trained from my existing processed images)
+- **Phase 2:** Word-level ASL recognition (trained from WLASL videos from Hugging Face)
 
 ## Quick Start
 
@@ -16,13 +16,13 @@ pip install --break-system-packages -r requirements.txt
 
 ### Phase 1: CNN-Based Fingerspelling (Current)
 
-**Uses your existing processed images - no new data collection needed!**
+**I use my existing processed images, so I don’t need new data collection for Phase 1.**
 
 1. **Train Model:**
    ```bash
    jupyter notebook notebooks/train_cnn_model.ipynb
    ```
-   Run all cells - uses your existing `dataSet/` images
+   Run all cells — it uses my `dataSet/` images
 
 2. **Run Application:**
    ```bash
@@ -31,7 +31,7 @@ pip install --break-system-packages -r requirements.txt
 
 ### Phase 2: Word-Level Recognition (Ready!)
 
-**Uses WLASL dataset from Hugging Face - no webcam needed!**
+**I use the WLASL video dataset from Hugging Face, so I can start Phase 2 without collecting new data.**
 
 1. **Install Dependencies:**
    ```bash
@@ -53,14 +53,14 @@ pip install --break-system-packages -r requirements.txt
    python app/word_app.py
    ```
 
-**See [PHASE2_START.md](PHASE2_START.md) for detailed guide.**
+**I documented the full Phase 2 steps in [PHASE2_START.md](PHASE2_START.md).**
 
 ## Detailed Guide
 
 See [SETUP_GUIDE.md](SETUP_GUIDE.md) for:
 - Complete setup instructions
 - Troubleshooting
-- Phase 2 implementation guide
+- Phase 2 implementation guide (WLASL → landmarks → sequence model)
 - Next steps roadmap
 
 ## Project Structure
@@ -88,13 +88,13 @@ asl_extended/
 ## Features
 
 **Phase 1 (CNN):**
-- Works with your existing processed images
+- Works with my existing processed images
 - No webcam needed for training
 - Real-time recognition with temporal smoothing
 - GUI application
 
 **Phase 2 (Landmarks + WLASL):**
-- Uses WLASL dataset from Hugging Face
+- Uses the WLASL video dataset from Hugging Face
 - MediaPipe Holistic for full-body landmarks
 - BiLSTM for sequence recognition
 - Word-level ASL recognition
